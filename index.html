@@ -1,398 +1,491 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
-<title>ЛЕО ГРИЗ // ДОСЬЕ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#06070a;
-  --panel:#0c0e13;
-  --panel2:#0e1016;
-  --gold:#d9ab55;
-  --gold-bright:#f2d28a;
-  --gold-dim:rgba(217,171,85,.32);
-  --line:rgba(217,171,85,.22);
-  --text:#c6cad4;
-  --muted:#7d8496;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  background:
-    radial-gradient(1200px 600px at 50% -10%, rgba(217,171,85,.07), transparent 60%),
-    radial-gradient(900px 500px at 100% 110%, rgba(217,171,85,.05), transparent 60%),
-    var(--bg);
-  color:var(--text);
-  font-family:'Rajdhani',sans-serif;
-  font-size:17px;
-  line-height:1.65;
-  overflow-x:hidden;
-}
-/* фактура: треугольная сетка + сканлайны */
-body::before{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><path d='M0 120L60 0 120 120ZM0 120H120' fill='none' stroke='rgba(217,171,85,0.06)' stroke-width='1'/></svg>");
-}
-body::after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:2;
-  background:repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px);
-}
-.sheet{max-width:940px;margin:0 auto;padding:26px 16px 70px;position:relative;z-index:1}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ехидна | Безродная — Профиль Персонажа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e8e8e8;
+            --panel-bg: #ffffff;
+            --text-main: #1a1a1a;
+            --text-muted: #555555;
+            --accent-toxic: #4a7c59;
+            --accent-dark: #2d1b4e;
+            --border-color: #000000;
+            --screentone: radial-gradient(circle, #000000 1px, transparent 1px);
+        }
 
-/* ===== Рамка со срезанными углами ===== */
-.frame{
-  position:relative;padding:1px;
-  background:linear-gradient(150deg, rgba(242,210,138,.85), rgba(217,171,85,.12) 38%, rgba(217,171,85,.55) 72%, rgba(120,95,45,.18));
-  clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
-}
-.frame>.inner{
-  background:linear-gradient(165deg, var(--panel2), var(--panel) 55%, #0a0c10);
-  clip-path:polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
-}
-.frame::before,.frame::after{content:"";position:absolute;width:9px;height:9px;background:var(--gold);opacity:.85;z-index:3}
-.frame::before{top:0;right:0;clip-path:polygon(0 0,100% 0,100% 100%)}
-.frame::after{bottom:0;left:0;clip-path:polygon(0 0,0 100%,100% 100%)}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* ===== Шапка ===== */
-.hero .inner{position:relative;overflow:hidden;padding:30px 32px 26px}
-.hero-bg{
-  position:absolute;inset:0;
-  background:url("https://upload.wikimedia.org/wikipedia/en/a/a5/Jensen_-_Deus_Ex_Human_Revolution.jpg") center 28%/cover no-repeat;
-  opacity:.30;filter:grayscale(.35) contrast(1.05);
-}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,9,12,.35), rgba(8,9,12,.92) 78%)}
-.hero .inner>*{position:relative;z-index:1}
-.hud-strip{
-  display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-  font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);border-bottom:1px dashed var(--line);padding-bottom:10px;margin-bottom:22px;
-}
-.hud-strip b{color:var(--gold);font-weight:400}
-.dot{display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:7px;box-shadow:0 0 8px var(--gold);animation:pulse 2.4s ease-in-out infinite;transform:rotate(45deg)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-h1{
-  font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(34px,7vw,58px);
-  letter-spacing:.14em;color:var(--gold-bright);text-transform:uppercase;
-  text-shadow:0 0 30px rgba(217,171,85,.35), 0 0 4px rgba(217,171,85,.25);
-}
-.tagline{
-  font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);margin-top:8px;
-}
-blockquote{
-  margin-top:22px;padding:12px 18px;border-left:2px solid var(--gold);
-  background:linear-gradient(90deg, rgba(217,171,85,.08), transparent 70%);
-  font-family:'Share Tech Mono',monospace;font-style:italic;font-size:14px;color:#cbb27f;letter-spacing:.03em;
-}
+        body {
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background-color: var(--bg-color);
+            background-image: var(--screentone);
+            background-size: 8px 8px;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-/* ===== Карточка личности ===== */
-.id-block{display:grid;grid-template-columns:300px 1fr;gap:20px;margin-top:22px}
-.portrait .inner{position:relative;overflow:hidden}
-.portrait img{width:100%;height:400px;object-fit:cover;object-position:center 18%;display:block;filter:contrast(1.05) saturate(.92)}
-.scan{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,.16) 2px 3px)}
-.scan::after{
-  content:"";position:absolute;left:0;right:0;height:32%;
-  background:linear-gradient(180deg, transparent, rgba(242,210,138,.10), transparent);
-  animation:scanmove 5.5s linear infinite;
-}
-@keyframes scanmove{from{top:-35%}to{top:105%}}
-.portrait .cap{
-  position:absolute;bottom:0;left:0;right:0;z-index:2;
-  font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);background:linear-gradient(180deg, transparent, rgba(6,7,10,.85));
-  padding:22px 14px 10px;
-}
-.id-data .inner{padding:20px 22px}
-.id-title{font-family:'Orbitron';font-size:13px;letter-spacing:.28em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
-.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:9px 2px;border-bottom:1px dashed var(--line)}
-.row:last-child{border-bottom:none}
-.row .k{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.row .v{font-family:'Orbitron';font-size:15px;color:var(--gold-bright);text-align:right}
-.mini-render{margin-top:14px;border:1px solid var(--line);background:rgba(217,171,85,.04);padding:6px}
-.mini-render img{width:100%;height:170px;object-fit:contain;display:block}
+        .manga-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--panel-bg);
+            border: 3px solid var(--border-color);
+            box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
 
-/* ===== Панели секций ===== */
-.panel{margin-top:22px}
-.panel .inner{padding:24px 28px}
-.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
-.sec-num{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:.15em}
-h2{font-family:'Orbitron';font-size:17px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#e9d19c;white-space:nowrap}
-.sec-line{flex:1;height:1px;background:linear-gradient(90deg, var(--gold-dim), transparent)}
-p+p{margin-top:12px}
-.panel p{color:#c3c8d2}
-.panel p::selection{background:var(--gold);color:#0a0a0a}
+        /* Manga Header / Cover Style */
+        .header-panel {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=1000&auto=format&fit=crop') center/cover no-repeat;
+            border-bottom: 4px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+        }
 
-/* ===== Космолёт ===== */
-.ship-img .inner{position:relative;overflow:hidden}
-.ship-img img{width:100%;height:340px;object-fit:cover;display:block;filter:grayscale(.25) contrast(1.05)}
-.ship-img .cap{position:absolute;bottom:0;left:0;right:0;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:linear-gradient(180deg, transparent, rgba(6,7,10,.85));padding:20px 14px 10px}
+        .header-panel::before {
+            content: "VOL. 1";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 14px;
+            border: 2px solid white;
+            padding: 4px 8px;
+            background: rgba(0,0,0,0.7);
+        }
 
-/* ===== Системный блок (AINFO) ===== */
-.sysbox{
-  border:1px solid var(--line);background:rgba(217,171,85,.05);
-  padding:16px 18px;font-family:'Share Tech Mono',monospace;font-size:13px;
-  clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
-}
-.sysbox .r{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dotted rgba(217,171,85,.18)}
-.sysbox .r:last-child{border-bottom:none}
-.sysbox .k{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:11px}
-.sysbox .v{color:var(--gold-bright)}
+        .main-title {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            text-shadow: 4px 4px 0px var(--accent-toxic);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
 
-/* ===== Навыки ===== */
-.skill{display:grid;grid-template-columns:150px 1fr 52px;align-items:center;gap:14px;padding:8px 0}
-.skill .k{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.track{height:9px;background:#171a21;border:1px solid rgba(255,255,255,.05);position:relative}
-.fill{position:absolute;inset:1px auto 1px 1px;background:linear-gradient(90deg, #8a6a2f, var(--gold) 60%, var(--gold-bright));box-shadow:0 0 10px rgba(217,171,85,.45)}
-.skill .v{font-family:'Orbitron';font-size:15px;color:var(--gold-bright);text-align:right}
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-toxic);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
 
-/* ===== Таблицы корабля/статов ===== */
-.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.cell{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:12px 10px;text-align:center;
-  clip-path:polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));}
-.cell .k{display:block;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
-.cell .v{font-family:'Orbitron';font-size:16px;color:var(--gold-bright)}
-.cell .v.big{font-size:24px}
+        /* Speech Bubble */
+        .quote-bubble {
+            position: absolute;
+            top: 40px;
+            left: 30px;
+            background: white;
+            color: black;
+            padding: 20px 25px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+            max-width: 250px;
+            text-align: center;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+        }
 
-/* ===== Нейромод ===== */
-.mod{border:1px solid var(--line);border-left:3px solid var(--gold);background:linear-gradient(90deg, rgba(217,171,85,.08), transparent 65%);padding:18px 20px}
-.mod h3{font-family:'Orbitron';font-size:16px;letter-spacing:.2em;color:var(--gold-bright);text-transform:uppercase}
-.mod .sub{font-style:italic;color:#b98f4e;font-size:15px;margin:4px 0 12px}
-.mod dl{display:grid;grid-template-columns:170px 1fr;gap:6px 16px;font-size:15px}
-.mod dt{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding-top:3px}
-.mod dd{color:#c3c8d2}
+        .quote-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 30px;
+            border-width: 15px 15px 0;
+            border-style: solid;
+            border-color: var(--border-color) transparent;
+            display: block;
+            width: 0;
+        }
 
-/* ===== Снаряжение ===== */
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.chip{border:1px dashed var(--line);padding:5px 12px;font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.08em;color:#c2a266;background:rgba(217,171,85,.04)}
-.items{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.item{border:1px solid var(--line);background:rgba(255,255,255,.02);padding:14px 16px;position:relative;
-  clip-path:polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));}
-.item h3{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:8px}
-.item h3::before{content:"◆ ";color:var(--gold)}
-.item p{font-size:14.5px;color:#aeb4c0;line-height:1.55}
-.blueprints{margin-top:16px;border-top:1px dashed var(--line);padding-top:14px}
-.blueprints h3{font-family:'Orbitron';font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.blueprints ul{list-style:none}
-.blueprints li{padding:7px 0 7px 22px;border-bottom:1px dotted rgba(217,171,85,.14);font-size:15px;position:relative}
-.blueprints li::before{content:"▸";position:absolute;left:2px;color:var(--gold)}
-.blueprints li b{color:var(--gold-bright);font-weight:600}
-.blueprints li .comp{color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:.1em}
+        .quote-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -9px;
+            left: 33px;
+            border-width: 12px 12px 0;
+            border-style: solid;
+            border-color: white transparent;
+            display: block;
+            width: 0;
+            z-index: 1;
+        }
 
-/* ===== Доступы / футер ===== */
-.empty{font-family:'Share Tech Mono',monospace;color:var(--muted);letter-spacing:.12em;font-size:13px;text-transform:uppercase}
-footer{margin-top:26px;text-align:center;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:#565d6e}
-footer b{color:var(--gold);font-weight:400}
+        /* Content Layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
 
-@media (max-width:760px){
-  .id-block{grid-template-columns:1fr}
-  .portrait img{height:440px}
-  .grid5{grid-template-columns:repeat(2,1fr)}
-  .skill{grid-template-columns:110px 1fr 44px}
-  .mod dl{grid-template-columns:1fr}
-  .panel .inner{padding:20px 18px}
-}
-</style>
+        .panel {
+            padding: 25px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .panel-full {
+            grid-column: 1 / -1;
+        }
+
+        .panel-right {
+            border-left: 2px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-toxic);
+            border: 2px solid var(--border-color);
+            transform: rotate(45deg);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .stat-item {
+            background: #f0f0f0;
+            padding: 10px;
+            border: 2px solid var(--border-color);
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        .stat-label {
+            font-weight: 700;
+            color: var(--accent-dark);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* Character Section */
+        .character-layout {
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+        }
+
+        .character-img {
+            width: 200px;
+            flex-shrink: 0;
+            border: 3px solid var(--border-color);
+            box-shadow: 5px 5px 0px var(--accent-toxic);
+            transform: rotate(-2deg);
+            background: white;
+            padding: 5px;
+        }
+
+        .character-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .character-text {
+            flex: 1;
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .character-text p {
+            margin-bottom: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, transparent 60%, var(--accent-toxic) 60%);
+            font-weight: 700;
+            padding: 0 4px;
+        }
+
+        /* Manga Traits List */
+        .traits-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .traits-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .traits-list li::before {
+            content: '◆';
+            color: var(--accent-toxic);
+            font-size: 0.8rem;
+        }
+
+        /* Biography Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            background: #fafafa;
+            border: 2px solid var(--border-color);
+            padding: 15px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-dark);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+        }
+
+        .timeline-age {
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 700;
+            color: var(--accent-toxic);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .timeline-img {
+            float: right;
+            width: 120px;
+            margin-left: 15px;
+            margin-bottom: 10px;
+            border: 2px solid var(--border-color);
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+
+        .timeline-img:hover {
+            filter: grayscale(0%);
+        }
+
+        /* Footer / Warning */
+        .footer-panel {
+            background: var(--accent-dark);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.8rem;
+            border-top: 4px solid var(--border-color);
+        }
+
+        .warning-text {
+            color: var(--accent-toxic);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            .panel-right {
+                border-left: none;
+                border-top: 2px solid var(--border-color);
+            }
+            .character-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+            .character-img {
+                width: 150px;
+                transform: rotate(0deg);
+            }
+            .main-title {
+                font-size: 2.5rem;
+            }
+            .quote-bubble {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin: 20px auto;
+                max-width: 80%;
+            }
+            .header-panel {
+                height: auto;
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-<div class="sheet">
 
-  <!-- ШАПКА -->
-  <header class="frame hero">
-    <div class="inner">
-      <div class="hero-bg"></div>
-      <div class="hud-strip">
-        <span><span class="dot"></span>ДОСЬЕ // ЛИЧНОЕ ДЕЛО</span>
-        <span>ID: <b>LG-2077-SV</b></span>
-        <span>СТАТУС: <b>ПОДТВЕРЖДЁН</b></span>
-      </div>
-      <h1>Лео Гриз</h1>
-      <div class="tagline">Межпланетный торговец · Пилот · Командир КС «Эхо»</div>
-      <blockquote>«Стало ужасающе очевидно, что наши технологии превзошли нашу человечность»</blockquote>
-    </div>
-  </header>
-
-  <!-- КАРТОЧКА ЛИЧНОСТИ -->
-  <section class="id-block">
-    <div class="frame portrait">
-      <div class="inner">
-        <img src="https://static.wikia.nocookie.net/deusex/images/5/59/Adam_MD_bust.png/revision/latest?cb=20160428212202&path-prefix=en" alt="adam-jensen">
-        <div class="scan"></div>
-        <div class="cap">Внешность · референс: Adam Jensen</div>
-      </div>
-    </div>
-    <div class="frame id-data">
-      <div class="inner">
-        <div class="id-title">// Базовые параметры</div>
-        <div class="row"><span class="k">Возраст</span><span class="v">27 лет</span></div>
-        <div class="row"><span class="k">Рост</span><span class="v">187 см</span></div>
-        <div class="row"><span class="k">Вес</span><span class="v">78 кг</span></div>
-        <div class="row"><span class="k">Пол</span><span class="v">Мужчина</span></div>
-        <div class="row"><span class="k">Родная планета</span><span class="v">Светомир</span></div>
-        <div class="mini-render">
-          <img src="https://upload.wikimedia.org/wikipedia/en/a/a0/Deus_Ex_MD_Adam_Jensen.png" alt="adam-jensen-combat">
+<div class="manga-page">
+    <!-- Header / Cover -->
+    <div class="header-panel">
+        <div class="quote-bubble">
+            «Судьба вещества заключена в его дозе.»
         </div>
-      </div>
+        <h1 class="main-title">ЕХИДНА</h1>
+        <div class="subtitle">Безродная / Служанка</div>
     </div>
-  </section>
 
-  <!-- БИОГРАФИЯ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">01</span><h2>Биография</h2><span class="sec-line"></span></div>
-      <p>Старик всегда любил ретро-стиль, и где-то даже умудрялся доставать аналоговые сигареты. То ли ему нравился вкус, то ли азарт как в русской рулетке, но с раком вместо пистолета. С точки зрения Лео, старик курил такие сигареты от того, что ожоги они оставляли настоящие, а не электронные. Обидно, что так награждался его интерес к электрогитаре. Впрочем, Лео на него не обижался; по крайней мере, не надолго. Может старик и не лучший отец, но только такого дали, а кушать хочется.</p>
-      <p>Поэтому нет ничего удивительного в том, что при первой же возможности Лео отправился в колледж, следовать своей мечте — стать пилотом, командиром своего корабля, свободным бороздить пространство безграничного космоса, и наконец вырваться из огромного, но от этого не менее тесного и душного Метрополиса.</p>
-      <p>Учеба, впрочем, шла как будто бы перпендикулярно мечте. От абсолютно бесполезной в вакууме аэродинамики и талмудов таможенных правил до теории Межпространственного Скачка — от скуки хотелось лезть на стенку, но Лео не человек-паук, поэтому просто спал на парте. К его счастью, даже кое-как выпускавшихся с радостью принимал к себе один работодатель. Так Лео подписал военный контракт в пограничную службу космического пространства Светомира.</p>
-      <p>Служба в ПоСКоПе по уровню интереса от учебы практически не отличалась. Вся его работа заключалась в контакте с прибывающими суднами, дистанционном сканировании и, при необходимости, досмотре перед посадкой. Только последнее требовало хоть какого-то пилотирования, хоть и нужно всего-то пристыковаться к их космолёту. Конечно, в случае войны он должен был бы пилотировать боевой крейсер и защищать орбиту Светомира. Но войны за всё время его контракта, к счастью, не случилось.</p>
-      <p>Но даже у такой скучной работы оказались свои плюсы. Во-первых, будучи приукрашенным таможенником, Лео навёл контакты с контрабандистами, проникся их схемами и немало заработал на барахлящем сканере. Во-вторых, с цифровой корочки оказалось довольно легко снять копию и, подобрав ключи к шифрам, подшаманить с датами.</p>
-      <p>Вот так Лео стал «межпланетным торговцем», как он называет себя; проще говоря, барыгой. Если вы хотите достать что-то — что угодно! — а главное, получить это в целости, сохранности и в полном неведении любопытных глаз государства — Лео ваш человек.</p>
-    </div>
-  </section>
-
-  <!-- ХАРАКТЕР -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">02</span><h2>Характер</h2><span class="sec-line"></span></div>
-      <p>Лео легкомысленный, дерзкий и предприимчивый. Для него важны свобода и независимость, а что даёт больше свободы, чем старые-добрые межгалактические кредиты? Деньги — основная причина, держащая его в текущей профессии, это главная его мотивация и главная цель. К сожалению, порой в азарте погони за прибылью Лео попадает в серьёзные долги — его пристрастие к азартным играм привело к запрету посещать некоторые планеты системы, что порой мешает торговле.</p>
-      <p>Продажа всего и вся — это сложная задача не для всех, не только из-за необходимости оставаться скрытным, но и из-за всплывающих моральных вопросов. Оружие террористической группировке или нейро-наркотик торчку? Одних денег для этого недостаточно, нужно уметь убедить себя, в правильности поступка. И Лео научился убеждать себя очень хорошо. Например, ему помогает ритуал перед крупной сделкой: он не сойдёт с космолёта, пока не засадит три дротика в яблочко в дартсе. Конечно, у него есть своя мораль, но она покупается по рыночной цене. При этом к своим коллегам по промыслу он относится предвзято, тут проявляется его лицемерная сторона.</p>
-      <p>Лео очень упрямый, стоит на своём как баран, и часто ему удаётся убеждать других в своей точке зрения. Особенно это полезно, когда дело касается обсуждения цены товара. Не меньше в продажах ему помогает его чувство юмора. Немного мешает, стоит сказать, чрезмерная вспыльчивость — очень легко он может взорваться и даже полезть в драку. Такая вспыльчивость результат чрезмерного интереса в качестве продаваемого товара; слишком часто Лео проверял разные порошки на себе. Тут можно заметить, что ему нравятся эксперименты с химией, причем в буквальном смысле тоже, и на его космолёте есть небольшая лаборатория. Ещё он любит свой космолёт, и детский восторг полёта его не покинул.</p>
-    </div>
-  </section>
-
-  <!-- КОСМОЛЁТ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">03</span><h2>Космолёт «Эхо»</h2><span class="sec-line"></span></div>
-      <div class="frame ship-img" style="margin-bottom:16px">
-        <div class="inner">
-          <img src="https://i.pinimg.com/564x/cb/ff/fd/cbfffd3444b42cfd9dc7e2be396c3bf0.jpg" alt="cargo-spaceship">
-          <div class="scan"></div>
-          <div class="cap">КС «Эхо» · грузовая платформа · класс E</div>
+    <!-- Stats Section -->
+    <div class="content-grid">
+        <div class="panel">
+            <h2 class="section-title">Досье</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">Возраст</span>
+                    <span class="stat-value">14 лет</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Раса</span>
+                    <span class="stat-value">Человек</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Рост / Вес</span>
+                    <span class="stat-value">150 см / 41 кг</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Поселение</span>
+                    <span class="stat-value">Зеленолесье</span>
+                </div>
+                <div class="stat-item" style="grid-column: 1 / -1;">
+                    <span class="stat-label">Род занятий</span>
+                    <span class="stat-value">Служанка / Негласный экспериментатор</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <p>Эхо — персональный грузовой космолёт, предназначенный для перевозки мало- и средне-габаритного груза. Грузовой отсек представляет из себя толстый свинцовый контейнер объемом около 300 кубических метров, оборудованный современной системой охлаждения, кодовым замком и ультра-фиолетовыми лампами для обеззараживания. Эхо обладает повышенной маневренностью среди кораблей своего класса.</p>
-      <p>Жилая часть корабля относительно простая, но рассчитана на долгосрочные путешествия: есть комфортабельный душ, система фильтрации воды и воздуха, кухня с электрической плитой, химическая лаборатория, а также небольшая спальная, которая превращается в рабочий кабинет благодаря кровати, убирающейся в стену после нажатия на кнопку.</p>
+
+        <div class="panel panel-right">
+            <h2 class="section-title">Визуальный образ</h2>
+            <div style="text-align: center;">
+                <img src="https://i.ibb.co/8DSng1sg/4.png" alt="Ехидна" style="max-width: 100%; border: 2px solid #000; box-shadow: 4px 4px 0px #4a7c59;">
+                <p style="font-family: 'Roboto Mono', monospace; font-size: 0.75rem; margin-top: 10px; color: #555;">[FIG. 01: Основной облик]</p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- СИСТЕМНЫЕ ДАННЫЕ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">04</span><h2>Характеристики персонажа</h2><span class="sec-line"></span></div>
-      <div class="sysbox">
-        <div class="r"><span class="k">Игровой класс</span><span class="v">Дипломат</span></div>
-        <div class="r"><span class="k">Предыстория</span><span class="v">Авиатор</span></div>
-        <div class="r"><span class="k">Светомир</span><span class="v">+1 к науке</span></div>
-      </div>
+    <!-- Character Section -->
+    <div class="panel panel-full">
+        <h2 class="section-title">Глава I: Характер</h2>
+        <div class="character-layout">
+            <div class="character-img">
+                <img src="https://i.ibb.co/2YYxJ1LR/5-1.png" alt="Детали характера">
+            </div>
+            <div class="character-text">
+                <p>Лишённая семьи, магического дара и физической силы, Ехидна рано поняла, что сможет выжить и обрести ценность лишь благодаря своему <span class="highlight">уму</span>. Она не сражается, редко возражает вслух и почти никогда не повышает голос.</p>
+                
+                <p>Эмпатическая глухота мешает ей распознавать собственные эмоции и исключает возможность сопереживания. Тем не менее жизнь в чужих стенах научила её <span class="highlight">механически определять настроение</span> высокородных господ.</p>
+
+                <ul class="traits-list">
+                    <li><strong>Атропофилка:</strong> испытывает сильное влечение к ядам. Видит в них честное, простое и сильное вещество.</li>
+                    <li><strong>Левша:</strong> подписывает ингредиенты не названиями, а ассоциациями, структурируя внутренний мир.</li>
+                    <li><strong>Болевой порог:</strong> аномально высокий. Считает боль закономерной платой за знание.</li>
+                    <li><strong>Предпочтения:</strong> тишина, порядок, холод, сладости, резкие запахи трав. Маленькие хрупкие предметы дают ощущение контроля.</li>
+                    <li><strong>Непереносимость:</strong> лактоза и чрезмерно острая пища (притупляет вкус ядов).</li>
+                </ul>
+
+                <p style="margin-top: 15px; border-left: 4px solid var(--accent-dark); padding-left: 15px; font-style: italic; color: var(--text-muted);">
+                    Главный страх: потерять ясность ума. Боится тотального подчинения мыслей, чужих беспорядочных эмоциональных всплесков и места, где не осталось тайн.
+                </p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- НАВЫКИ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">05</span><h2>Навыки</h2><span class="sec-line"></span></div>
-      <div class="skill"><span class="k">Выносливость</span><div class="track"><div class="fill" style="width:75%"></div></div><span class="v">9.0</span></div>
-      <div class="skill"><span class="k">Инженерия</span><div class="track"><div class="fill" style="width:58.3%"></div></div><span class="v">7.0</span></div>
-      <div class="skill"><span class="k">Харизма</span><div class="track"><div class="fill" style="width:91.6%"></div></div><span class="v">11.0</span></div>
-      <div class="skill"><span class="k">Наука</span><div class="track"><div class="fill" style="width:75%"></div></div><span class="v">9.0</span></div>
-      <div class="skill"><span class="k">Сила</span><div class="track"><div class="fill" style="width:58.3%"></div></div><span class="v">7.0</span></div>
+    <!-- Biography Section -->
+    <div class="panel panel-full">
+        <h2 class="section-title">Глава II: Биография</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-age">[ РАННЕЕ ДЕТСТВО ]</span>
+                <img src="https://i.ibb.co/0VXz7MKc/1.png" alt="Ранние годы" class="timeline-img">
+                <p>Родилась в неизвестном месте при неясных обстоятельствах. Первым её приютил клан <strong>Сильванхарт</strong> в Хиллсгарде. Формально прислуга, фактически — ученица. Изучала письмо, чтение, этикет и благородные дома, но ей строго запрещали магию и оружие. Изоляция от сверстников превратила её в тихого, отстранённого ребёнка.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-age">[ 9 ЛЕТ: ПЕРЕЛОМ ]</span>
+                <img src="https://i.ibb.co/jvcSytvw/6-2.png" alt="Переломный момент" class="timeline-img">
+                <p>Внезапная смерть кухарки от отравления неизвестным веществом. Взрослые скрыли подробности, что пробудило жгучее любопытство. Прокравшись в аптекарскую кладовую, она выпила слабые настои. Боль сменилась <span class="highlight">странной обволакивающей ясностью</span>. Мир выстроился по полочкам. Увлечение раскрыли, её наказали, заперли и поспешно отослали в другой дом в Верховье. Её прежний господин вскоре умер при подозрительных обстоятельствах.</p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="timeline-age">[ ПОДРОСТКОВЫЙ ВОЗРАСТ ]</span>
+                <img src="https://i.ibb.co/vCB89Msw/7-1.png" alt="Эксперименты" class="timeline-img">
+                <p>Новое поместье со строгими правилами. Запрос на обучение знахарству был отвергнут, назначена общая служба. В ответ на тотальный контроль Ехидна научилась механически считывать настроение господ, чтобы находить время для тайных опытов. Методичное изучение: от переписывания и сжигания книг до садовых токсинов. <strong>Правая рука стала её журналом</strong>: ожоги, порезы, уколы и попытки лечения мазями собственного приготовления. Выработала высокий болевой порог и устойчивость к микродозам токсинов.</p>
+            </div>
+
+            <div class="timeline-item" style="border-color: var(--accent-toxic); background: #f4f9f5;">
+                <span class="timeline-age" style="color: var(--accent-dark);">[ 14 ЛЕТ: ТЕКУЩИЙ МОМЕНТ ]</span>
+                <p>Получила последнее поручение — выучить язык жестов. Вскоре после этого, без объяснения причин, была поспешно отослана на службу новому высокородному господину: <strong>Хоши Батисте</strong>, правителю Зеленолесья.</p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- КОРАБЛЬ + СТАТЫ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">06</span><h2>Корабль</h2><span class="sec-line"></span></div>
-      <div class="grid5">
-        <div class="cell"><span class="k">Класс</span><span class="v">E</span></div>
-        <div class="cell"><span class="k">Ускорители</span><span class="v">Бустер</span></div>
-        <div class="cell"><span class="k">Двигатель</span><span class="v">Импульс</span></div>
-        <div class="cell"><span class="k">Щит</span><span class="v">Панцирь</span></div>
-        <div class="cell"><span class="k">Оружие</span><span class="v">Залп</span></div>
-      </div>
-      <div class="sec-head" style="margin-top:24px"><span class="sec-num">07</span><h2>Статы</h2><span class="sec-line"></span></div>
-      <div class="grid2">
-        <div class="cell"><span class="k">Опыт</span><span class="v big">770</span></div>
-        <div class="cell"><span class="k">Кредиты</span><span class="v big">12 950</span></div>
-      </div>
+    <!-- Footer -->
+    <div class="footer-panel">
+        <p class="warning-text">⚠ ВНИМАНИЕ: ОБЪЕКТ НАБЛЮДЕНИЯ ⚠</p>
+        <p style="margin-top: 10px;">Досье составлено на основе наблюдений. Любое несанкционированное копирование или распространение материалов преследуется по законам высокородных домов.</p>
+        <p style="margin-top: 15px; font-size: 0.7rem; opacity: 0.7;">[ КОНЕЦ ФАЙЛА ]</p>
     </div>
-  </section>
-
-  <!-- НЕЙРОМОДЫ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">08</span><h2>Нейромоды</h2><span class="sec-line"></span></div>
-      <div class="mod">
-        <h3>Нейросплав</h3>
-        <div class="sub">Укрепление конечностей</div>
-        <dl>
-          <dt>Тип урона и защиты</dt><dd>средний</dd>
-          <dt>Негативный эффект</dt><dd>дисфункция усиленных конечностей на 2 хода</dd>
-          <dt>Условия</dt>
-          <dd>Укрепление действует 3 хода, включая ход активации способности. Не больше 3 частей тела за одно использование. Если в первый ход активации усилилась одна конечность, а в следующем вторая, длительность всех считается от первой – вторая будет усилена 2 хода. Получить дисфункцию и применить умение вновь на другие конечности нельзя — надо ждать отката.</dd>
-        </dl>
-      </div>
-    </div>
-  </section>
-
-  <!-- ДОСТУПЫ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">09</span><h2>Доступы</h2><span class="sec-line"></span></div>
-      <div class="empty">— нет записей —</div>
-    </div>
-  </section>
-
-  <!-- СНАРЯЖЕНИЕ -->
-  <section class="frame panel">
-    <div class="inner">
-      <div class="sec-head"><span class="sec-num">10</span><h2>Снаряжение</h2><span class="sec-line"></span></div>
-      <div class="chips">
-        <span class="chip">Рюкзак</span><span class="chip">Ручка</span><span class="chip">Блокнот</span>
-        <span class="chip">Смартфон</span><span class="chip">Механические часы</span><span class="chip">Сигареты</span>
-        <span class="chip">Фальшивый паспорт</span>
-      </div>
-      <div class="items">
-        <div class="item"><h3>Бластер</h3><p>Энергетическое оружие. Урон — малый. Дальность — 30 метров. Частота стрельбы — 5 выстрелов за ход. Объём магазина — 10 патронов.</p></div>
-        <div class="item"><h3>AUG 2666</h3><p>Самозарядная огнестрельная винтовка. Урон — средний. Дальность — 300 метров. Частота стрельбы — 4 выстрела за ход. Объём магазина — 36 патронов.</p></div>
-        <div class="item"><h3>Электрошокер</h3><p>Небольшой пистолет, выпускающий электрический заряд незначительного урона. При попадании парализует цель на 1 ход. Частота стрельбы — 1 выстрел в ход. Дистанция — 20 метров. Ёмкость на 10 зарядов, требует подзарядки от корабля.</p></div>
-        <div class="item"><h3>Самурай</h3><p>Стильная кожаная куртка со встроенным охлаждением и подогревом. Не поможет в экстремальных условиях, но согреет или охладит в базовых сценариях исследований. Включается двумя кнопками внутри. Держит заряд 24 часа в активированном режиме, требует подзарядки от корабля. На спине нарисован японский демон «Они».</p></div>
-        <div class="item"><h3>Страж</h3><p>Небольшой охранный дрон. Имеет скорострельную пушку, стреляющую энергетическими снарядами среднего урона. Управляется браслетом: специальные жесты, которые можно персонализировать, отвечают за разные действия, включая режим управления голосом. ИИ выделяет цель исходя из слов или жестов обладателя. Требует подзарядки от корабля раз в 30 ходов.</p></div>
-        <div class="item"><h3>Барьер</h3><p>Тип защиты: незначительный или серьёзный. Накладка для предплечья с искусственным интеллектом. За секунду до столкновения генерирует полупрозрачное защитное поле чуть шире предплечья. В активной форме щит защищает от 1 серьёзного урона, 3 среднего, 10 малого и 20 незначительного. При первом пробитии требует ремонта с навыком инженерии 10 и подзарядки от корабля. Щит активируется даже в том случае, если барьер спрятан под одеждой. Не спасает от падения с высоты.</p></div>
-        <div class="item"><h3>Портативный репликатор</h3><p>Универсальное устройство для создания предметов из энергии и материи по чертежам. Включает сенсорный экран, модуль синтеза и отсек для сырья. Чертежи загружаются картриджами, по сети или проводному подключению. После создания 5 предметов требует подзарядки от корабля. Для переноски на спине требуются навыки силы и выносливости 8 уровня или больше. Для крафта сложных вещей могут быть условия по уровню инженерии и науки.</p></div>
-      </div>
-      <div class="blueprints">
-        <h3>Чертежи</h3>
-        <ul>
-          <li><b>Лечебный пластырь</b> — мгновенно заживляет средний и ниже урон. <span class="comp">Компоненты: 3 расходника</span></li>
-          <li><b>Пилюля жизни</b> — мгновенно восстанавливает выносливость на 2 пункта. <span class="comp">Компоненты: 3 расходника</span></li>
-          <li><b>Улучшенный кислородный баллон</b> — расходует кислород в два раза медленнее. <span class="comp">Компоненты: 5 расходников</span></li>
-          <li><b>Дыхательный аппарат</b> — лицевая маска для подключения баллона. <span class="comp">Компоненты: 3 расходника</span></li>
-          <li><b>Аптечка</b> — набор из нескольких предметов лечения, которые подойдут практически для любой ситуации: от нейтрализации ядов до остановки кровотечения и инфекций. Останавливает смертельный урон, если это возможно, залечивает серьёзный урон за 2 хода, средний и ниже мгновенно. <span class="comp">Компоненты: 5 расходников</span></li>
-          <li><span class="comp">1 расходников</span></li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <footer>ДОСЬЕ СФОРМИРОВАНО · <b>ИСТОЧНИК ОБРАЗА: ADAM JENSEN — DEUS EX</b> · «I NEVER ASKED FOR THIS»</footer>
-
 </div>
-<script>
-/* если картинка не загрузилась — прячем её рамку, чтобы не было дыр */
-document.querySelectorAll('img').forEach(function(img){
-  img.addEventListener('error', function(){
-    var f = img.closest('.frame'); if(f){ f.style.display='none'; }
-    else { img.style.display='none'; }
-  });
-});
-</script>
+
 </body>
 </html>
-<iframe src="leo_griz.html" width="100%" height="2600" style="border:0" scrolling="no"></iframe>
-
